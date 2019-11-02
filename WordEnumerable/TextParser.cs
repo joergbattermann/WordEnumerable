@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading;
 
-namespace jB.WordEnumerable
+namespace WordEnumerable
 {
     /// <summary>
     /// TextParser was taken mostly (some minor refactoring took place only) from
@@ -17,16 +17,18 @@ namespace jB.WordEnumerable
         /// </summary>
         /// <value>The text.</value>
         public string Text { get; private set; }
+
         /// <summary>
         /// Gets or sets the position.
         /// </summary>
         /// <value>The position.</value>
         public int Position { get; private set; }
+
         /// <summary>
         /// Gets the remaining.
         /// </summary>
         /// <value>The remaining.</value>
-        public int Remaining { get { return Text.Length - Position; } }
+        public int Remaining => Text.Length - Position;
 
         /// <summary>
         /// The Null character constant
@@ -42,18 +44,12 @@ namespace jB.WordEnumerable
         /// Initializes a new instance of the <see cref="TextParser"/> class.
         /// </summary>
         /// <param name="text">The text.</param>
-        public TextParser(string text = null)
-        {
-            Reset(text);
-        }
+        public TextParser(string text = null) => Reset(text);
 
         /// <summary>
         /// Resets the current position to the start of the current document
         /// </summary>
-        public void Reset()
-        {
-            Position = 0;
-        }
+        public void Reset() => Position = 0;
 
         /// <summary>
         /// Sets the current document and resets the current position to the start of it
@@ -61,17 +57,14 @@ namespace jB.WordEnumerable
         /// <param name="text"></param>
         public void Reset(string text)
         {
-            Text = text ?? String.Empty;
+            Text = text ?? string.Empty;
             Position = 0;
         }
 
         /// <summary>
         /// Indicates if the current position is at the end of the current document
         /// </summary>
-        public bool IsAtEndOfText
-        {
-            get { return (Position >= Text.Length); }
-        }
+        public bool IsAtEndOfText => (Position >= Text.Length);
 
         /// <summary>
         /// Returns the character at the current position, or a null character if we're
@@ -92,8 +85,8 @@ namespace jB.WordEnumerable
         /// <returns>The character at the specified position</returns>
         public char Peek(int ahead)
         {
-            var pos = (Position + ahead);
-            return pos < Text.Length ? Text[pos] : NullChar;
+            var newPosition = (Position + ahead);
+            return newPosition < Text.Length ? Text[newPosition] : NullChar;
         }
 
         /// <summary>
@@ -101,10 +94,7 @@ namespace jB.WordEnumerable
         /// </summary>
         /// <param name="start"></param>
         /// <returns></returns>
-        public string Extract(int start)
-        {
-            return Extract(start, Text.Length);
-        }
+        public string Extract(int start) => Extract(start, Text.Length);
 
         /// <summary>
         /// Extracts a substring from the specified range of the current text
@@ -112,49 +102,46 @@ namespace jB.WordEnumerable
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public string Extract(int start, int end)
-        {
-            return Text.Substring(start, end - start);
-        }
+        public string Extract(int start, int end) => Text.Substring(start, end - start);
 
         /// <summary>
         /// Moves the current position ahead one character
         /// </summary>
-        public void MoveAhead()
-        {
-            MoveAhead(1);
-        }
+        public void MoveAhead() => MoveAhead(1);
 
         /// <summary>
         /// Moves the current position ahead the specified number of characters
         /// </summary>
         /// <param name="ahead">The number of characters to move ahead</param>
-        public void MoveAhead(int ahead)
-        {
-            Position = Math.Min(Position + ahead, Text.Length);
-        }
+        public void MoveAhead(int ahead) => Position = Math.Min(Position + ahead, Text.Length);
 
         /// <summary>
         /// Moves to the next occurrence of the specified string
         /// </summary>
-        /// <param name="s">String to find</param>
+        /// <param name="value">String to find</param>
         /// <param name="ignoreCase">Indicates if case-insensitive comparisons are used</param>
-        public void MoveTo(string s, bool ignoreCase = false)
+        public void MoveTo(string value, bool ignoreCase = false)
         {
-            Position = Text.IndexOf(s, Position, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+            Position = Text.IndexOf(value, Position, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+            
             if (Position < 0)
+            {
                 Position = Text.Length;
+            }
         }
 
         /// <summary>
         /// Moves to the next occurrence of the specified character
         /// </summary>
-        /// <param name="c">Character to find</param>
-        public void MoveTo(char c)
+        /// <param name="character">Character to find</param>
+        public void MoveTo(char character)
         {
-            Position = Text.IndexOf(c, Position);
+            Position = Text.IndexOf(character, Position);
+
             if (Position < 0)
+            {
                 Position = Text.Length;
+            }
         }
 
         /// <summary>
@@ -166,7 +153,9 @@ namespace jB.WordEnumerable
         {
             Position = Text.IndexOfAny(chars, Position);
             if (Position < 0)
+            {
                 Position = Text.Length;
+            }
         }
 
         /// <summary>
@@ -177,7 +166,9 @@ namespace jB.WordEnumerable
         public void MovePast(char[] chars)
         {
             while (IsInArray(Peek(), chars))
+            {
                 MoveAhead();
+            }
         }
 
         /// <summary>
@@ -187,21 +178,18 @@ namespace jB.WordEnumerable
         /// <param name="c">Character to find</param>
         /// <param name="chars">Character array to search</param>
         /// <returns></returns>
-        protected bool IsInArray(char c, char[] chars)
-        {
-            return chars.Any(character => c == character);
-        }
+        protected bool IsInArray(char c, char[] chars) => chars.Any(character => c == character);
 
         /// <summary>
         /// Moves the current position to the first character that is part of a newline
         /// </summary>
         public void MoveToEndOfLine()
         {
-            char c = Peek();
-            while (c != '\r' && c != '\n' && !IsAtEndOfText)
+            var character = Peek();
+            while (character != '\r' && character != '\n' && !IsAtEndOfText)
             {
                 MoveAhead();
-                c = Peek();
+                character = Peek();
             }
         }
 
@@ -210,8 +198,10 @@ namespace jB.WordEnumerable
         /// </summary>
         public void MovePastWhitespace()
         {
-            while (Char.IsWhiteSpace(Peek()))
+            while (char.IsWhiteSpace(Peek()))
+            {
                 MoveAhead();
+            }
         }
 
         #region Implementation of IDisposable

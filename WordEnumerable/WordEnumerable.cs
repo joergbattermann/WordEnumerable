@@ -1,8 +1,8 @@
-﻿namespace jB.WordEnumerable
-{
-    using System.Collections;
-    using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
+namespace WordEnumerable
+{
     public class WordEnumerable : IEnumerable<string>
     {
         /// <summary>

@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordEnumerable", "WordEnumerable\WordEnumerable.csproj", "{6C9883DD-4D75-4083-86A7-AE4899D61660}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordEnumerable", "WordEnumerable\WordEnumerable.csproj", "{47EE2922-D693-4764-98F5-D00375EDF336}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6C9883DD-4D75-4083-86A7-AE4899D61660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C9883DD-4D75-4083-86A7-AE4899D61660}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C9883DD-4D75-4083-86A7-AE4899D61660}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C9883DD-4D75-4083-86A7-AE4899D61660}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47EE2922-D693-4764-98F5-D00375EDF336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47EE2922-D693-4764-98F5-D00375EDF336}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47EE2922-D693-4764-98F5-D00375EDF336}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47EE2922-D693-4764-98F5-D00375EDF336}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0EAB029F-DED3-42E5-B98B-3F24FC72C632}
 	EndGlobalSection
 EndGlobal

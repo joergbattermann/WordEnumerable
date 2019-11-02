@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace jB.WordEnumerable
+namespace WordEnumerable
 {
-    using System.Collections;
-
     internal class WordEnumerator : IEnumerator<string>
     {
         private readonly TextParser _textParser;
@@ -15,10 +12,7 @@ namespace jB.WordEnumerable
         /// Initializes a new instance of the <see cref="WordEnumerator"/> class.
         /// </summary>
         /// <param name="text">The text.</param>
-        internal WordEnumerator(string text = null)
-        {
-            _textParser = new TextParser(text);
-        }
+        internal WordEnumerator(string text = null) => _textParser = new TextParser(text);
 
         #region Implementation of IEnumerator
 
@@ -35,12 +29,12 @@ namespace jB.WordEnumerable
             if (_textParser.IsAtEndOfText)
                 return false;
 
-            while (!_textParser.IsAtEndOfText && !Char.IsLetterOrDigit(_textParser.Peek()))
+            while (!_textParser.IsAtEndOfText && !char.IsLetterOrDigit(_textParser.Peek()))
                 _textParser.MoveAhead();
 
             _currentStartPosition = _textParser.Position;
 
-            while (Char.IsLetterOrDigit(_textParser.Peek()))
+            while (char.IsLetterOrDigit(_textParser.Peek()))
                 _textParser.MoveAhead();
 
             return true;
@@ -63,13 +57,7 @@ namespace jB.WordEnumerable
         /// <returns>
         /// The element in the collection at the current position of the enumerator.
         /// </returns>
-        public string Current
-        {
-            get
-            {
-                return _textParser.Extract(_currentStartPosition, _textParser.Position);
-            }
-        }
+        public string Current => _textParser.Extract(_currentStartPosition, _textParser.Position);
 
         /// <summary>
         /// Gets the current element in the collection.
@@ -79,10 +67,7 @@ namespace jB.WordEnumerable
         /// </returns>
         /// <exception cref="T:System.InvalidOperationException">The enumerator is positioned before the first element of the collection or after the last element.
         ///                 </exception><filterpriority>2</filterpriority>
-        object IEnumerator.Current
-        {
-            get { return Current; }
-        }
+        object IEnumerator.Current => Current;
 
         #endregion
 
