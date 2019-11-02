@@ -1,5 +1,9 @@
 IEnumerable<string> and corresponding IEnumerator<T> implementation which takes an input string and lets you iterate over its words, e.g. like this:
 
+
+```
+using WordEnumerable
+
 namespace TextEnumerable.Sample
 {
     class Program
@@ -17,7 +21,7 @@ namespace TextEnumerable.Sample
         }
     }
 }
-
+```
 
 
 (c) of the underlying TextParser.cs bits go to Jonathan Wood (see his article at http://www.blackbeltcoder.com/Articles/strings/a-text-parsing-helper-class), I just merely wrapped the enumeration parts around it to make a tiny bit more usable.
