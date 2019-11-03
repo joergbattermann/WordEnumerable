@@ -20,3 +20,9 @@ jobs:
         dotnet-version: 3.0.100
     - name: Build with dotnet
       run: dotnet build --configuration Release
+    
+    - name: Install NuGet client
+      uses: warrenbuckley/Setup-Nuget@v1
+
+    - name: Push generated package to GitHub registry
+      run: nuget push .\WordEnumerable\WordEnumerable\bin\Release\*.nupkg -Source "https://nuget.pkg.github.com/joergbattermann/index.json" -SkipDuplicate
